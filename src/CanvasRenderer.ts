@@ -32,8 +32,8 @@ export class CanvasRenderer{
             0, 0, this.outCanvasElement.width, this.outCanvasElement.height,
         )
       }
-        //   requestAnimationFrame(this.copyFrame)
-      setTimeout(this.copyFrame, 0)
+      requestAnimationFrame(this.copyFrame)
+      //setTimeout(this.copyFrame, 0)
     }
   
     setRenderRect = (realStartX:number, realStartY:number, realEndX:number, realEndY:number) =>{

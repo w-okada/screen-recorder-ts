@@ -217,14 +217,20 @@ const App = () => {
         const outStream = outCanvasRef.current!.captureStream()
         appInfo.outStream = outStream
 
-        if(appInfo.recorder && appInfo.recorder.state === "recording"){
-          console.log("stop recoder!")
-          appInfo.recorder.stop()
+        // if(appInfo.recorder && appInfo.recorder.state == "recording"){
+        if(appInfo.recorder){
+          try{
+            console.log("stop recoder!")
+            appInfo.recorder.stop()
+          }catch(exception){
+            console.log("--------------------------------------",exception)
+          }
         }
         // @ts-ignore
         const recorder = new MediaRecorder(outStream, options)
         // @ts-ignore
         recorder.ondataavailable = (e:BlobEvent) => {
+          console.log("ondata 111aaa")
           appInfo.chunks!.push(e.data)
         }
         appInfo.recorder = recorder
@@ -277,24 +283,31 @@ const App = () => {
     // video がロードされたら情報を更新
     videoElem.onloadedmetadata = () =>{
       appInfo.endTime = videoElem.duration
-      try{
-        appInfo.recorder.stop()
-        appInfo.isRecording = false
-      }catch(e){}
-      while(appInfo.chunks.length !== 0){
-        appInfo.chunks.shift()
-      }
-      setAppInfo(Object.assign({}, appInfo))
+
     }
     videoElem.src = URL.createObjectURL(new Blob([data.buffer], { type: 'video/mp4' }));
   }
 
   const stopRecord = async() => {
+    try{
+      appInfo.recorder.stop()
+      appInfo.isRecording = false
+    }catch(e){
+      console.log("------------------------1", e)
+    }
     if(appInfo.chunks.length>0){
       await toMp4(new Uint8Array(await (new Blob(appInfo.chunks)).arrayBuffer()));
     }else{
       alert("not enough data")
     }
+
+
+    appInfo.chunks = []
+    // @ts-ignore
+    appInfo.recorder.ondataavailable = (e:BlobEvent) => {
+      appInfo.chunks!.push(e.data)
+    }    
+    setAppInfo(Object.assign({}, appInfo))    
   }
 
   const removeScreen = async() =>{
@@ -400,6 +413,8 @@ const App = () => {
           :
           <span>not active</span>
         }</span>
+        <br/><br/><br/>
+         <a href="https://www.flect.co.jp/">Powered by FLECT Co., LTD.</a> wataru.okada@flect.co.jp
 
       </div>
       <div style={{position: "absolute", top:appInfo.screenHeight+30, left:appInfo.screenWidth + 10, width:appInfo.screenWidth}}>
@@ -459,16 +474,14 @@ const App = () => {
 
 
             <br />
-            OutputFormat(gif is slow):
+            OutputFormat(gif is slow and not stable):
               <select onChange={(e)=>{appInfo.outputFormat = e.target.value; setAppInfo(Object.assign({}, appInfo))}} value={appInfo.outputFormat}>
                 <option value="gif" >gif </option>
                 <option value="mp4" >mp4 </option>
               </select>
             
           </div>
-
             <button onClick={closeModal}>close</button>
-
         </Modal>
     </>
   )
