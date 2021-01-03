@@ -11,3 +11,18 @@ code {
   font-family: source-code-pro, Menlo, Monaco, Consolas, 'Courier New',
     monospace;
 }
+
+
+.btn-orange{
+  color: #fff;
+  border-radius: 25% 10%;
+  background-color: #eb6100;
+  padding-left:10px;
+  padding-right:10px;
+  margin: 3px;
+}
+.btn-orange:hover{
+  color: #fff;
+  background: #f56533;
+}
+
