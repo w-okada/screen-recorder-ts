@@ -230,7 +230,6 @@ const App = () => {
         const recorder = new MediaRecorder(outStream, options)
         // @ts-ignore
         recorder.ondataavailable = (e:BlobEvent) => {
-          console.log("ondata 111aaa")
           appInfo.chunks!.push(e.data)
         }
         appInfo.recorder = recorder

@@ -2,6 +2,7 @@
   "name": "screen-recorder-ts",
   "version": "0.1.0",
   "private": true,
+  "homepage":"./",
   "dependencies": {
     "@ffmpeg/core": "^0.8.5",
     "@ffmpeg/ffmpeg": "^0.9.6",
