@@ -430,7 +430,7 @@ const App = () => {
           style={customStyles}
           contentLabel="Example Modal"
         >
-          {/* <h2 ref={subtitle => this.subtitle = subtitle}>ModalWindow</h2> */}
+          <h2> Configuration </h2>
           <div>
             ScreenSize(Width x Hiehgt):
               <select value={appInfo.maxScreenWidth.toString()} onChange={(e)=>{appInfo.maxScreenWidth = parseInt(e.target.value); setAppInfo(Object.assign({}, appInfo))}} >
