@@ -20,9 +20,30 @@ code {
   padding-left:10px;
   padding-right:10px;
   margin: 3px;
+  cursor: pointer;
 }
 .btn-orange:hover{
   color: #fff;
-  background: #f56533;
+  background: #f57044;
 }
+
+
+.btn-grey{
+  color: #fff;
+  border-radius: 25% 10%;
+  background-color: #666666;
+  padding-left:10px;
+  padding-right:10px;
+  margin: 3px;
+}
+
+.label-brown{
+  color: #000000;
+  /* background-color: #E7B977; */
+  background-color: #cccccc;
+  padding-left:10px;
+  padding-right:10px;
+  margin: 3px;
+}
+
 
