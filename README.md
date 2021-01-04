@@ -1,12 +1,14 @@
 Screen Recorder 
 ====
-This software records the screen with your browser.
+This software records the screen with your browser. Safari is not supported. Chrome is supported in both Windows and MacOS.
 
 ![ezgif-1-b16517983da2](https://user-images.githubusercontent.com/48346627/103484824-02ac1f80-4e35-11eb-9ca4-c3a560ca6b70.gif)
 
 # Demo
 
 https://flect-lab-web.s3-us-west-2.amazonaws.com/P02_screen-recorder-ts/index.html
+
+
 
 # Usage
 First, set the screen to be recorded with "Set Screen" button.  Then, you can change the area to be record left side of the window.  Push "Start Rec." to start recording, and "Stop Rec." button to stop recording.

@@ -280,11 +280,14 @@ const App = () => {
     const data = appInfo.ffmpeg!.FS('readFile', outName)
 
     // video がロードされたら情報を更新
-    videoElem.onloadedmetadata = () =>{
-      appInfo.endTime = videoElem.duration
-
-    }
-    videoElem.src = URL.createObjectURL(new Blob([data.buffer], { type: 'video/mp4' }));
+    await new Promise<void>((resolve, reject)=>{
+      videoElem.onloadedmetadata = () =>{
+        console.log("onload metaa data", videoElem.duration)
+        appInfo.endTime = videoElem.duration
+        resolve()
+      }
+      videoElem.src = URL.createObjectURL(new Blob([data.buffer], { type: 'video/mp4' }));
+    })
   }
 
   const stopRecord = async() => {
@@ -299,14 +302,10 @@ const App = () => {
     }else{
       alert("not enough data")
     }
-
-
-    appInfo.chunks = []
-    // @ts-ignore
-    appInfo.recorder.ondataavailable = (e:BlobEvent) => {
-      appInfo.chunks!.push(e.data)
-    }    
-    setAppInfo(Object.assign({}, appInfo))    
+    while(appInfo.chunks.length!==0){
+      appInfo.chunks.shift()
+    }
+    setAppInfo(Object.assign({}, appInfo))
   }
 
   const removeScreen = async() =>{
