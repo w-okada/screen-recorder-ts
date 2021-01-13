@@ -5,17 +5,27 @@ export const getRestrictedSizeByMax = (maxWidth:number, maxHeight:number, inputW
         return [inputWidth,  inputHeight]
     }
 
-    const maxAspect = maxWidth  / maxHeight
-    const aspect    = inputWidth / inputHeight
-    if(maxAspect > aspect){
-      const height = maxHeight
-      const width  = maxHeight/inputHeight * inputWidth 
-      return [width, height]
+    const xRate     = maxWidth / inputWidth
+    const tmpHeight = inputHeight * xRate
+    if(tmpHeight > maxHeight){
+      const yRate = maxHeight / inputHeight
+      const tmpWidth = yRate * inputWidth
+      return [tmpWidth, maxHeight]
     }else{
-      const width  = maxWidth
-      const height = maxWidth/inputWidth * inputHeight 
-      return [width, height]
+      return [maxWidth, tmpHeight]
     }
+
+    // const maxAspect = maxWidth  / maxHeight
+    // const aspect    = inputWidth / inputHeight
+    // if(maxAspect > aspect){
+    //   const height = maxHeight
+    //   const width  = maxHeight/inputHeight * inputWidth 
+    //   return [width, height]
+    // }else{
+    //   const width  = maxWidth
+    //   const height = maxWidth/inputWidth * inputHeight 
+    //   return [width, height]
+    // }
 }
   
 

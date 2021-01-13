@@ -190,19 +190,34 @@ const App = () => {
 
       appInfo.mediaStream = media
 
-      //// スクリーンサイズの算出
-      appInfo.inputWidth = media.getVideoTracks()[0].getSettings().width!
-      appInfo.inputHeight = media.getVideoTracks()[0].getSettings().height!
-      const [screenWidth, screenHeight] = getRestrictedSizeByMax(appInfo.maxScreenWidth, appInfo.maxScreenHeight, appInfo.inputWidth, appInfo.inputHeight)
-      appInfo.screenWidth = screenWidth
-      appInfo.screenHeight = screenHeight
+      // //// スクリーンサイズの算出
+      // appInfo.inputWidth = media.getVideoTracks()[0].getSettings().width!
+      // appInfo.inputHeight = media.getVideoTracks()[0].getSettings().height!
+      // const [screenWidth, screenHeight] = getRestrictedSizeByMax(appInfo.maxScreenWidth, appInfo.maxScreenHeight, appInfo.inputWidth, appInfo.inputHeight)
+      // console.log("SIZE1:", appInfo.maxScreenWidth, appInfo.maxScreenHeight, appInfo.inputWidth, appInfo.inputHeight, screenWidth, screenHeight)
+      // appInfo.screenWidth = screenWidth
+      // appInfo.screenHeight = screenHeight
 
 
 
       hiddenVideoRef.current!.pause()
       hiddenVideoRef.current!.srcObject = media
-      hiddenVideoRef.current!.onloadedmetadata = () =>{
+      hiddenVideoRef.current!.onloadedmetadata = (e) =>{
         hiddenVideoRef.current!.play()
+        const videoWidth = hiddenVideoRef.current!.videoWidth
+        const videoHeight = hiddenVideoRef.current!.videoHeight
+
+        appInfo.inputWidth = videoWidth
+        appInfo.inputHeight = videoHeight
+        const [screenWidth, screenHeight] = getRestrictedSizeByMax(appInfo.maxScreenWidth, appInfo.maxScreenHeight, appInfo.inputWidth, appInfo.inputHeight)
+        console.log("SIZE2:", appInfo.maxScreenWidth, appInfo.maxScreenHeight, appInfo.inputWidth, appInfo.inputHeight, screenWidth, screenHeight)
+        appInfo.screenWidth = screenWidth
+        appInfo.screenHeight = screenHeight
+
+        hiddenVideoRef.current!.width = screenWidth
+        hiddenVideoRef.current!.height = screenHeight
+        
+
 
         //// メディアレコーダー
         const options = {
@@ -262,7 +277,7 @@ const App = () => {
     }
   }
 
-  const toMp4 = async (webcamData:Uint8Array) => {    
+  const toMp4 = async (blobs:Blob[]) => {    
     const name = 'record.webm';
     const outName = 'out.mp4'
     const videoElem = outputVideoRef.current!
@@ -274,7 +289,7 @@ const App = () => {
       });
     }
     // @ts-ignore
-    appInfo.ffmpeg.FS('writeFile', name, await fetchFile(webcamData));
+    appInfo.ffmpeg.FS('writeFile', name, await fetchFile(new Blob(blobs)));
     await appInfo.ffmpeg!.run('-i', name,  '-c', 'copy', outName);
 //    await appInfo.ffmpeg!.run('-i', name, outName);
     const data = appInfo.ffmpeg!.FS('readFile', outName)
@@ -298,7 +313,7 @@ const App = () => {
       console.log("------------------------1", e)
     }
     if(appInfo.chunks.length>0){
-      await toMp4(new Uint8Array(await (new Blob(appInfo.chunks)).arrayBuffer()));
+      await toMp4(appInfo.chunks);
     }else{
       alert("not enough data")
     }
