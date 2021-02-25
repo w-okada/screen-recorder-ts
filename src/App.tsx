@@ -214,8 +214,8 @@ const App = () => {
         appInfo.screenWidth = screenWidth
         appInfo.screenHeight = screenHeight
 
-        hiddenVideoRef.current!.width = screenWidth
-        hiddenVideoRef.current!.height = screenHeight
+        // hiddenVideoRef.current!.width = screenWidth
+        // hiddenVideoRef.current!.height = screenHeight
         
 
 
