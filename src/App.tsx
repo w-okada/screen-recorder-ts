@@ -57,7 +57,10 @@ interface AppInfo{
 }
 
 const initialState:AppInfo = {
-  ffmpeg:createFFmpeg({log:true}), 
+  ffmpeg:createFFmpeg({
+    log:true,
+    corePath: './ffmpeg-core.js',
+  }), 
   chunks:[],
   screenWidth:640,
   screenHeight:480,

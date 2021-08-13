@@ -8,6 +8,14 @@ This software records the screen with your browser. Safari is not supported. Chr
 
 https://flect-lab-web.s3-us-west-2.amazonaws.com/P02_screen-recorder-ts/index.html
 
+If you use firefox or chrome 92 or newer, you may get the error `ReferenceError: SharedArrayBuffer is not defined`.
+If so, please run your own server.
+
+```
+$ npm run build
+$ node server.js
+```
+
 
 
 # Usage
