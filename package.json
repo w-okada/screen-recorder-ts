@@ -1,48 +1,65 @@
 {
-  "name": "screen-recorder-ts",
-  "version": "0.1.0",
-  "private": true,
-  "homepage": "./",
-  "dependencies": {
-    "@ffmpeg/core": "^0.10.0",
-    "@ffmpeg/ffmpeg": "^0.10.1",
-    "@testing-library/jest-dom": "^5.11.4",
-    "@testing-library/react": "^11.1.0",
-    "@testing-library/user-event": "^12.1.10",
-    "@types/jest": "^26.0.15",
-    "@types/node": "^12.0.0",
-    "@types/react": "^16.9.53",
-    "@types/react-dom": "^16.9.8",
-    "@types/react-modal": "^3.10.6",
-    "react": "^17.0.1",
-    "react-dom": "^17.0.1",
-    "react-modal": "^3.10.1",
-    "react-scripts": "4.0.1",
-    "typescript": "^4.0.3",
-    "web-vitals": "^0.2.4"
-  },
-  "scripts": {
-    "start": "react-scripts start",
-    "build": "react-scripts build",
-    "test": "react-scripts test",
-    "eject": "react-scripts eject"
-  },
-  "eslintConfig": {
-    "extends": [
-      "react-app",
-      "react-app/jest"
-    ]
-  },
-  "browserslist": {
-    "production": [
-      ">0.2%",
-      "not dead",
-      "not op_mini all"
-    ],
-    "development": [
-      "last 1 chrome version",
-      "last 1 firefox version",
-      "last 1 safari version"
-    ]
-  }
+    "name": "screen-recorder-ts",
+    "version": "1.0.0",
+    "description": "",
+    "main": "backend/dist/index.js",
+    "scripts": {
+        "clean:backend": "rimraf backend/dist/*",
+        "tsc:backend": "tsc -p tsconfig.backend.json",
+        "build:backend": "run-s clean:backend tsc:backend",
+        "clean:frontend": "rimraf frontend/dist/*",
+        "copyresources:frontend": "mkdir -p frontend/dist &&cp frontend/public/* frontend/dist && cp -r frontend/resources/ffmpeg frontend/dist",
+        "webpack:frontend": "webpack --config webpack.frontend.config.js",
+        "build:frontend": "run-s clean:frontend copyresources:frontend webpack:frontend",
+        "deploy": "git push heroku master",
+        "start": "node  backend/dist/index.js",
+        "watch": "webpack-dev-server  --config webpack.frontend.config.js",
+        "test": "echo \"Error: no test specified\" && exit 1"
+    },
+    "keywords": [],
+    "author": "",
+    "license": "ISC",
+    "devDependencies": {
+        "@babel/plugin-transform-runtime": "^7.17.12",
+        "@babel/preset-env": "^7.17.12",
+        "@babel/preset-react": "^7.17.12",
+        "@babel/preset-typescript": "^7.17.12",
+        "@types/connect-livereload": "^0.6.0",
+        "@types/express": "^4.17.13",
+        "@types/livereload": "^0.9.2",
+        "@types/node": "^17.0.34",
+        "@types/react": "^18.0.9",
+        "@types/react-dom": "^18.0.4",
+        "babel-loader": "^8.2.5",
+        "connect-livereload": "^0.6.1",
+        "css-loader": "^6.7.1",
+        "daisyui": "^2.15.0",
+        "html-loader": "^3.1.0",
+        "html-webpack-plugin": "^5.5.0",
+        "livereload": "^0.9.3",
+        "nodemon": "^2.0.16",
+        "npm-run-all": "^4.1.5",
+        "postcss-loader": "^6.2.1",
+        "rimraf": "^3.0.2",
+        "style-loader": "^3.3.1",
+        "ts-loader": "^9.3.0",
+        "typescript": "^4.6.4",
+        "webpack": "^5.72.1",
+        "webpack-cli": "^4.9.2",
+        "webpack-dev-server": "^4.9.0"
+    },
+    "dependencies": {
+        "@dannadori/demo-base": "^1.0.13",
+        "@ffmpeg/core": "^0.10.0",
+        "@ffmpeg/ffmpeg": "^0.10.1",
+        "@fortawesome/fontawesome": "^1.1.8",
+        "@fortawesome/fontawesome-free-solid": "^5.0.13",
+        "@fortawesome/fontawesome-svg-core": "^6.1.1",
+        "@fortawesome/free-regular-svg-icons": "^6.1.1",
+        "@fortawesome/free-solid-svg-icons": "^6.1.1",
+        "@fortawesome/react-fontawesome": "^0.1.18",
+        "express": "^4.18.1",
+        "react": "^18.1.0",
+        "react-dom": "^18.1.0"
+    }
 }
