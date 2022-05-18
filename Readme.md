@@ -23,4 +23,4 @@ npm install
 npm run watch
 ```
 
-acesshttp://localhost:8080/
+acess http://localhost:8080/
