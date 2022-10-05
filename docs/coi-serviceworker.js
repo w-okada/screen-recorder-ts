@@ -1,6 +1,7 @@
 /*! coi-serviceworker v0.1.6 - Guido Zuidhof, licensed under MIT */
 let coepCredentialless = false;
 if (typeof window === "undefined") {
+    console.log("Window undef");
     self.addEventListener("install", () => self.skipWaiting());
     self.addEventListener("activate", (event) => event.waitUntil(self.clients.claim()));
 
@@ -54,7 +55,7 @@ if (typeof window === "undefined") {
         );
     });
 } else {
-    (() => {
+    console.log("Window def")(() => {
         // You can customize the behavior of this script through a global `coi` variable.
         const coi = {
             shouldRegister: () => true,
