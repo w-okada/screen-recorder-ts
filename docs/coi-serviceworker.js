@@ -55,7 +55,8 @@ if (typeof window === "undefined") {
         );
     });
 } else {
-    console.log("Window def")(() => {
+    (() => {
+        console.log("Window def");
         // You can customize the behavior of this script through a global `coi` variable.
         const coi = {
             shouldRegister: () => true,
