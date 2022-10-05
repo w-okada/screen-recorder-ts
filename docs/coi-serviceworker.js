@@ -1,7 +1,6 @@
 /*! coi-serviceworker v0.1.6 - Guido Zuidhof, licensed under MIT */
 let coepCredentialless = false;
 if (typeof window === "undefined") {
-    console.log("Window undef");
     self.addEventListener("install", () => self.skipWaiting());
     self.addEventListener("activate", (event) => event.waitUntil(self.clients.claim()));
 
@@ -24,9 +23,7 @@ if (typeof window === "undefined") {
 
     self.addEventListener("fetch", function (event) {
         const r = event.request;
-        console.log("fetchEVENT:1", r);
         if (r.cache === "only-if-cached" && r.mode !== "same-origin") {
-            console.log("fetchEVENT:2", r);
             return;
         }
 
@@ -39,7 +36,6 @@ if (typeof window === "undefined") {
         event.respondWith(
             fetch(request)
                 .then((response) => {
-                    console.log("fetchEVENT:3", response);
                     if (response.status === 0) {
                         return response;
                     }
@@ -58,7 +54,6 @@ if (typeof window === "undefined") {
     });
 } else {
     (() => {
-        console.log("Window def");
         // You can customize the behavior of this script through a global `coi` variable.
         const coi = {
             shouldRegister: () => true,
