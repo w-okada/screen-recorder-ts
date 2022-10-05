@@ -24,7 +24,9 @@ if (typeof window === "undefined") {
 
     self.addEventListener("fetch", function (event) {
         const r = event.request;
+        console.log("fetchEVENT:1", r);
         if (r.cache === "only-if-cached" && r.mode !== "same-origin") {
+            console.log("fetchEVENT:2", r);
             return;
         }
 
@@ -37,10 +39,10 @@ if (typeof window === "undefined") {
         event.respondWith(
             fetch(request)
                 .then((response) => {
+                    console.log("fetchEVENT:3", response);
                     if (response.status === 0) {
                         return response;
                     }
-
                     const newHeaders = new Headers(response.headers);
                     newHeaders.set("Cross-Origin-Embedder-Policy", coepCredentialless ? "credentialless" : "require-corp");
                     newHeaders.set("Cross-Origin-Opener-Policy", "same-origin");
@@ -103,7 +105,7 @@ if (typeof window === "undefined") {
                     // If the registration is active, but it's not controlling the page
                     if (registration.active && !n.serviceWorker.controller) {
                         !coi.quiet && console.log("Reloading page to make use of COOP/COEP Service Worker.");
-                        // coi.doReload();
+                        coi.doReload();
                     }
                 },
                 (err) => {
