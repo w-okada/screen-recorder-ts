@@ -103,7 +103,7 @@ if (typeof window === "undefined") {
                     // If the registration is active, but it's not controlling the page
                     if (registration.active && !n.serviceWorker.controller) {
                         !coi.quiet && console.log("Reloading page to make use of COOP/COEP Service Worker.");
-                        coi.doReload();
+                        // coi.doReload();
                     }
                 },
                 (err) => {
