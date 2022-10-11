@@ -20,6 +20,7 @@ const FrontPageDescriptionJp = () => {
         <div className="front-description">
             <p>
                 ブラウザを使った画面録画アプリケーションです。
+                ブラウザ単体で動くため、専用のアプリケーションのインストールは不要です。また、サーバとの通信も発生しないため通信負荷を気にする必要がありません。
             </p>
             <p>
                 ソースコード、使用方法は
@@ -41,6 +42,10 @@ const FrontPageDescriptionEn = () => {
             <p>
                 Record your screen with your browser!
             </p>
+            <p>
+                This application run on web browser and there is no need to install a dedicated application.  Also, since no communication with the server occurs after loaded, there is no need to worry about communication load.
+            </p>
+
             <p>
                 Usage and source code is in <a href="https://github.com/w-okada/screen-recorder-ts">the repository</a>
             </p>
