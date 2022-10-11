@@ -5,7 +5,6 @@
     "main": "backend/dist/index.js",
     "scripts": {
         "clean": "rimraf docs/*",
-        "copyresources___": "mkdir -p frontend/dist &&cp frontend/public/* frontend/dist && cp -r frontend/resources/ffmpeg frontend/dist",
         "webpack": "webpack --config webpack.frontend.config.js",
         "build": "run-s clean webpack",
         "start": "webpack-dev-server  --config webpack.frontend.config.js --host 0.0.0.0",
@@ -43,7 +42,6 @@
         "webpack-dev-server": "^4.11.1"
     },
     "dependencies": {
-        "@dannadori/demo-base": "^1.0.16",
         "@ffmpeg/core": "^0.11.0",
         "@ffmpeg/ffmpeg": "^0.11.5",
         "@fortawesome/fontawesome": "^1.1.8",
@@ -53,7 +51,6 @@
         "@fortawesome/free-regular-svg-icons": "^6.2.0",
         "@fortawesome/free-solid-svg-icons": "^6.2.0",
         "@fortawesome/react-fontawesome": "^0.2.0",
-        "express": "^4.18.2",
         "react": "^18.2.0",
         "react-dom": "^18.2.0"
     }
