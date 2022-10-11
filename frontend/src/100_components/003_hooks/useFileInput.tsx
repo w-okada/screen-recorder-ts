@@ -1,3 +1,5 @@
+// Ver: 2022/10/10
+
 export type FileInputState = {
     dataURL: string;
     error: boolean;
@@ -14,30 +16,32 @@ export const useFileInput = () => {
         fileInput.type = "file";
         const p = new Promise<string>((resolve, reject) => {
             fileInput.onchange = (e) => {
-                // eslint-disable-next-line @typescript-eslint/ban-ts-comment
                 // @ts-ignore
                 console.log("file select", e.target.files[0].type);
-                // eslint-disable-next-line @typescript-eslint/ban-ts-comment
                 // @ts-ignore
-                if (regex != "" && !e.target.files[0].type.match(regex)) {
-                    // eslint-disable-next-line @typescript-eslint/ban-ts-comment
-                    //@ts-ignore
-                    reject(`not target file type ${e.target.files[0].type}`);
-                }
+                const type = e.target.files[0].type
                 const reader = new FileReader();
                 reader.onload = () => {
+                    // @ts-ignore
+                    if (regex != "" && !type.match(regex)) {
+                        //@ts-ignore
+                        reject(`not target file type ${type}`);
+                    }
                     console.log("load data", reader.result as string);
                     resolve(reader.result as string);
                 };
-                // eslint-disable-next-line @typescript-eslint/ban-ts-comment
                 // @ts-ignore
                 reader.readAsDataURL(e.target.files[0]);
             };
             fileInput.click();
         });
 
-        const url = await p;
-        return url;
+        try {
+            const url = await p;
+            return url;
+        } catch (exception) {
+            throw exception
+        }
     };
     return { click };
 };
