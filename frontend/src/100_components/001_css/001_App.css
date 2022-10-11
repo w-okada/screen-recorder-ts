@@ -82,6 +82,7 @@ body {
 .front-title {
     font-size: 4rem;
     font-weight: 100;
+    text-align: center;
 }
 .front-description {
     font-size: 0.9rem;
