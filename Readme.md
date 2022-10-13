@@ -1,26 +1,33 @@
 # Screen Recorder
 
-This software records the screen with your browser. Safari is not supported. Chrome is supported in both Windows and MacOS.
+This software records the PC's screen only with your browser. 
 
-![ezgif-3-03986a03e4](https://user-images.githubusercontent.com/48346627/169025809-57783ecd-4e87-48fc-b4e1-71449bf943ef.gif)
+No addtional application is required!
+
+Chrome is supported in both Windows and MacOS. Safari is not supported. 
+
+![ezgif-1-e406039666](https://user-images.githubusercontent.com/48346627/195676741-faffc321-1cc2-4391-81d3-cfae38d26045.gif)
+
 
 # Demo
 
-https://screen-recorder-ts.herokuapp.com/frontend/
+https://w-okada.github.io/screen-recorder-ts/
 
 # Usage
-
+## Main Usage
 (1) push choose window button and select windows
 
-(2) push start rec. button.
+(2) push start to rec.
 
-(3) And then, when you want to stop rec, push the button.
+(3) when you want to stop rec, push the button.
 
-# Build and run
+## Other Usage
+You can merge your voice from your microphone.
 
-```
-npm install
-npm run watch
-```
+(1) check UseMic checkbox.
 
-acess http://localhost:8080/
+(2) select your microphone device.
+
+(3) then you can record your screen by the same operation as Main Usage.
+
+(4) If you want to change volume, set the gain with Audio Gain and Mic Gain slidebar.
