@@ -3,6 +3,7 @@ import { useStateControlCheckbox } from "../003_hooks/useStateControlCheckbox";
 import { AnimationTypes, HeaderButton, HeaderButtonProps } from "./101_HeaderButton";
 import { ScreenRecorderController } from "./310_ScreenRecorderController";
 import { MixController } from "./320_MixController";
+import { Links } from "./330_Links";
 
 export const RightSidebar = () => {
     const sidebarAccordionScreenRecorderControllerCheckBox = useStateControlCheckbox("screen-recorder-controller");
@@ -77,7 +78,7 @@ export const RightSidebar = () => {
                         <div className="sidebar-header-title">Links</div>
                         <div className="sidebar-header-caret"> {accodionButtonForLinks}</div>
                     </div>
-                    <MixController></MixController>
+                    <Links></Links>
                 </div>
 
             </div>
