@@ -7,6 +7,7 @@ import { MixController } from "./320_MixController";
 export const RightSidebar = () => {
     const sidebarAccordionScreenRecorderControllerCheckBox = useStateControlCheckbox("screen-recorder-controller");
     const sidebarAccordionMixControllerCheckBox = useStateControlCheckbox("mix-controller");
+    const sidebarAccordionLinksCheckBox = useStateControlCheckbox("links");
 
     const accodionButtonForScreenRecorderController = useMemo(() => {
         const accodionButtonForScreenRecorderControllerProps: HeaderButtonProps = {
@@ -30,6 +31,18 @@ export const RightSidebar = () => {
             tooltipClass: "tooltip-right",
         };
         return <HeaderButton {...accodionButtonForMixControllerProps}></HeaderButton>;
+    }, []);
+
+    const accodionButtonForLinks = useMemo(() => {
+        const accodionButtonForLinksProps: HeaderButtonProps = {
+            stateControlCheckbox: sidebarAccordionLinksCheckBox,
+            tooltip: "Open/Close",
+            onIcon: ["fas", "caret-up"],
+            offIcon: ["fas", "caret-up"],
+            animation: AnimationTypes.spinner,
+            tooltipClass: "tooltip-right",
+        };
+        return <HeaderButton {...accodionButtonForLinksProps}></HeaderButton>;
     }, []);
 
 
@@ -58,6 +71,14 @@ export const RightSidebar = () => {
                     <MixController></MixController>
                 </div>
 
+                {sidebarAccordionLinksCheckBox.trigger}
+                <div className="sidebar-partition">
+                    <div className="sidebar-header">
+                        <div className="sidebar-header-title">Links</div>
+                        <div className="sidebar-header-caret"> {accodionButtonForLinks}</div>
+                    </div>
+                    <MixController></MixController>
+                </div>
 
             </div>
         </>

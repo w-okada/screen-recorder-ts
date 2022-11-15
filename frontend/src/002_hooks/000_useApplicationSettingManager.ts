@@ -4,6 +4,8 @@ import { ApplicationSetting, fetchApplicationSetting } from "../001_clients_and_
 export type ApplicationSettingManagerStateAndMethod = {
     applicationSetting: ApplicationSetting | null
 }
+const LOCAL_STORAGE_PREFIX = location.pathname
+const LOCAL_STORAGE_APPLICATION_SETTING = `${LOCAL_STORAGE_PREFIX}_applicationSetting`
 
 export const useApplicationSettingManager = (): ApplicationSettingManagerStateAndMethod => {
     const [applicationSetting, setApplicationSetting] = useState<ApplicationSetting | null>(null)
@@ -11,8 +13,8 @@ export const useApplicationSettingManager = (): ApplicationSettingManagerStateAn
     /** (1) Initialize Setting */
     /** (1-1) Load from localstorage */
     const loadApplicationSetting = async () => {
-        if (localStorage.applicationSetting) {
-            const applicationSetting = JSON.parse(localStorage.applicationSetting) as ApplicationSetting
+        if (localStorage[LOCAL_STORAGE_APPLICATION_SETTING]) {
+            const applicationSetting = JSON.parse(localStorage[LOCAL_STORAGE_APPLICATION_SETTING]) as ApplicationSetting
             console.log("Load AppStteing from Local Storage", applicationSetting)
             setApplicationSetting({ ...applicationSetting })
         } else {

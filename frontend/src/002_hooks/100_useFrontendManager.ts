@@ -65,16 +65,9 @@ export const useFrontendManager = (): FrontendManagerStateAndMethod => {
     }, []);
     const [chunkSize, setChuhkSize] = useState<number>(0)
 
-
-    // const useMicrophoneRef = useRef<boolean>(false)
-    // const [useMicrophone, _setUseMicrophone] = useState<boolean>(useMicrophoneRef.current)
     const [useMicrophone, _setUseMicrophone] = useState<boolean>(false)
 
-    // const systemAudioGainRef = useRef<number>(1)
-    // const [systemAudioGain, _setSystemAudioGain] = useState<number>(systemAudioGainRef.current)
     const [systemAudioGain, _setSystemAudioGain] = useState<number>(1)
-    // const microphoneGainRef = useRef<number>(1)
-    // const [microphoneGain, _setMicrophoneGain] = useState<number>(microphoneGainRef.current)
     const [microphoneGain, _setMicrophoneGain] = useState<number>(1)
 
     const sysSrcNodeRef = useRef<MediaStreamAudioSourceNode | null>(null)
@@ -106,31 +99,6 @@ export const useFrontendManager = (): FrontendManagerStateAndMethod => {
     }, []);
 
 
-    // /////// RENDERER
-    // useEffect(() => {
-    //     const videoElem = document.getElementById(TARGET_SCREEN_VIDEO_ID) as HTMLVideoElement
-    //     const canvasElem = document.getElementById(RECORDING_CANVAS_ID) as HTMLCanvasElement
-    //     const ctx = canvasElem.getContext("2d")!
-    //     const renderCanvas = () => {
-    //         if (!videoElem) {
-    //             console.log("video elem null")
-    //         }
-    //         if (!canvasElem) {
-    //             console.log("canvas elem null")
-    //         }
-
-    //         ctx.clearRect(0, 0, canvasElem.width, canvasElem.height)
-    //         ctx.drawImage(videoElem, 0, 0, canvasElem.width, canvasElem.height)
-
-
-    //         requestIdRef.current = requestAnimationFrame(renderCanvas)
-    //     }
-    //     requestIdRef.current = requestAnimationFrame(renderCanvas)
-
-    //     return () => {
-    //         cancelAnimationFrame(requestIdRef.current)
-    //     }
-    // }, [])
 
     // (3) operation
     //// (3-1) set ms
@@ -138,10 +106,6 @@ export const useFrontendManager = (): FrontendManagerStateAndMethod => {
         const videoElem = document.getElementById(TARGET_SCREEN_VIDEO_ID) as HTMLVideoElement
         // const canvasElem = document.getElementById(RECORDING_CANVAS_ID) as HTMLCanvasElement
         videoElem.onloadedmetadata = () => {
-            // const videoWidth = videoElem.videoWidth
-            // canvasElem.width = videoWidth
-            // const videoHeight = videoElem.videoHeight
-            // canvasElem.height = videoHeight
             _setScreenMediaStream(ms)
         }
         videoElem.srcObject = ms
