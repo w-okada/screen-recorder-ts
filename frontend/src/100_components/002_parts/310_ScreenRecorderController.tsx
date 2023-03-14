@@ -78,6 +78,8 @@ export const ScreenRecorderController = () => {
         const constraints: DisplayMediaStreamConstraints = {
             audio: true,
             video: {
+                width: { ideal: 3840 },
+                height: { ideal: 2160 },
                 frameRate: 15
             }
         }
