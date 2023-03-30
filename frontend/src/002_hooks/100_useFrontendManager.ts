@@ -143,7 +143,7 @@ export const useFrontendManager = (): FrontendManagerStateAndMethod => {
             setChuhkSize(chunks.length)
         };
         try {
-            recorder.start(1000)
+            recorder.start(100)
         } catch (exception) {
             console.log(exception)
             alert(exception)
