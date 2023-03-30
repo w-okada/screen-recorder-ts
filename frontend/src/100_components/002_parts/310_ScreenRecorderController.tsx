@@ -48,7 +48,7 @@ export const ScreenRecorderController = () => {
                 buttonAction = () => { frontendManagerState.startRecording() }
                 break
             case "recording":
-                statusMessage = `(recording...${frontendManagerState.chunkSize})`;
+                statusMessage = `(recording...${Math.floor(frontendManagerState.chunkSize / 10)})`;
                 buttonMessage = "stop"
                 buttonClass = "sidebar-content-row-button-activated"
                 buttonAction = () => { frontendManagerState.stopRecording() }
@@ -75,6 +75,7 @@ export const ScreenRecorderController = () => {
     }, [frontendManagerState.recordingStatus, frontendManagerState.chunkSize, frontendManagerState.convertProgress])
 
     const onChooseWindowClicked = async () => {
+        // @ts-ignore
         const constraints: DisplayMediaStreamConstraints = {
             audio: true,
             video: {

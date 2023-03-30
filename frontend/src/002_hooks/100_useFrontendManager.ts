@@ -159,6 +159,11 @@ export const useFrontendManager = (): FrontendManagerStateAndMethod => {
         }
         setRecordingStatus("converting")
 
+        // Wait for receiving frame
+        await new Promise((resolve, _reject) => {
+            setTimeout(resolve, 1000 * 2)
+        })
+
         recorderRef.current.stop();
         if (chunks.length > 0) {
             await toMp4(chunks);
