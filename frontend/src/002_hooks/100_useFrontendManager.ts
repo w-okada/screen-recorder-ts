@@ -22,7 +22,9 @@ type FrontendManagerState = {
     screenMediaStream: MediaStream
     recordingStatus: RECORDING_STATUS
     convertProgress: number
-    chunkSize: number
+    chunkDuration: number
+    waitTimeToProcess: number
+    chunkNum: number
 
     useMicrophone: boolean
     systemAudioGain: number
@@ -36,9 +38,14 @@ export type FrontendManagerStateAndMethod = FrontendManagerState & {
     setUseMicrophone: (val: boolean) => void
     setSystemAudioGain: (val: number) => void
     setMicrophoneGain: (val: number) => void
+
+    setChunkDuration: (val: number) => void
+    setWaitTimeToProcess: (val: number) => void
 }
 
 export const useFrontendManager = (): FrontendManagerStateAndMethod => {
+    const [chunkDuration, setChunkDuration] = useState<number>(2)
+    const [waitTimeToProcess, setWaitTimeToProcess] = useState<number>(2)
     const { audioContext } = useAudioRoot()
     const { deviceManagerState } = useAppSetting()
     const systemAudioGainNode = useMemo(() => {
@@ -63,7 +70,7 @@ export const useFrontendManager = (): FrontendManagerStateAndMethod => {
     const chunks = useMemo(() => {
         return [] as Blob[];
     }, []);
-    const [chunkSize, setChuhkSize] = useState<number>(0)
+    const [chunkNum, setChuhkNum] = useState<number>(0)
 
     const [useMicrophone, _setUseMicrophone] = useState<boolean>(false)
 
@@ -140,10 +147,10 @@ export const useFrontendManager = (): FrontendManagerStateAndMethod => {
         recorder.ondataavailable = (e: BlobEvent) => {
             chunks.push(e.data);
 
-            setChuhkSize(chunks.length)
+            setChuhkNum(chunks.length)
         };
         try {
-            recorder.start(2000)
+            recorder.start(1000 * chunkDuration)
         } catch (exception) {
             console.log(exception)
             alert(exception)
@@ -161,7 +168,7 @@ export const useFrontendManager = (): FrontendManagerStateAndMethod => {
 
         // Wait for receiving frame
         await new Promise((resolve, _reject) => {
-            setTimeout(resolve, 1000 * 4)
+            setTimeout(resolve, 1000 * waitTimeToProcess)
         })
 
         recorderRef.current.stop();
@@ -280,10 +287,12 @@ export const useFrontendManager = (): FrontendManagerStateAndMethod => {
         screenMediaStream,
         recordingStatus,
         convertProgress,
-        chunkSize,
         useMicrophone,
         systemAudioGain,
         microphoneGain,
+        chunkDuration,
+        waitTimeToProcess,
+        chunkNum,
 
         setScreenMediaStream,
         startRecording,
@@ -291,6 +300,9 @@ export const useFrontendManager = (): FrontendManagerStateAndMethod => {
         setUseMicrophone,
         setSystemAudioGain,
         setMicrophoneGain,
+
+        setChunkDuration,
+        setWaitTimeToProcess,
     };
     return returnValue;
 };
