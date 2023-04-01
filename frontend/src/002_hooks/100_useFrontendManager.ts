@@ -143,7 +143,7 @@ export const useFrontendManager = (): FrontendManagerStateAndMethod => {
             setChuhkSize(chunks.length)
         };
         try {
-            recorder.start(100)
+            recorder.start(2000)
         } catch (exception) {
             console.log(exception)
             alert(exception)
@@ -161,7 +161,7 @@ export const useFrontendManager = (): FrontendManagerStateAndMethod => {
 
         // Wait for receiving frame
         await new Promise((resolve, _reject) => {
-            setTimeout(resolve, 1000 * 2)
+            setTimeout(resolve, 1000 * 4)
         })
 
         recorderRef.current.stop();
